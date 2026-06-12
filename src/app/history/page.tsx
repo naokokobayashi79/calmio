@@ -146,7 +146,7 @@ export default function HistoryPage() {
         {!showConfirm ? (
           <button
             onClick={() => setShowConfirm(true)}
-            className="w-full py-3 rounded-2xl text-[12px] text-[#BBBBBB] border border-[#EEEEEE] hover:border-[#DDDDDD] transition-all"
+            className="w-full py-3 rounded-2xl text-[12px] text-[#BBBBBB] border border-[#EEEEEE] cursor-pointer hover:border-[#CCCCCC] hover:text-[#999999] hover:bg-[#FAFAFA] transition-all duration-150"
           >
             履歴をすべて削除する
           </button>
@@ -156,13 +156,13 @@ export default function HistoryPage() {
             <div className="flex gap-2.5">
               <button
                 onClick={() => setShowConfirm(false)}
-                className="flex-1 py-3 rounded-2xl text-[13px] text-[#717171] border border-[#EEEEEE] hover:border-[#DDDDDD] transition-all"
+                className="flex-1 py-3 rounded-2xl text-[13px] text-[#717171] border border-[#EEEEEE] cursor-pointer hover:border-[#CCCCCC] hover:bg-[#FAFAFA] transition-all duration-150"
               >
                 キャンセル
               </button>
               <button
                 onClick={handleClear}
-                className="flex-1 py-3 rounded-2xl text-[13px] text-white bg-[#FF385C] hover:bg-[#E8304F] transition-all"
+                className="flex-1 py-3 rounded-2xl text-[13px] text-white bg-[#FF385C] cursor-pointer hover:bg-[#E8304F] hover:shadow-sm transition-all duration-150"
               >
                 削除する
               </button>

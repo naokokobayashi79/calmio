@@ -18,10 +18,10 @@ export default function ScoreInput({ label, value, onChange }: Props) {
           <button
             key={n}
             onClick={() => onChange(n)}
-            className={`flex-1 h-8 rounded-lg text-[11px] font-semibold transition-all duration-150 ${
+            className={`flex-1 h-8 rounded-lg text-[11px] font-semibold transition-all duration-150 cursor-pointer ${
               n <= value
-                ? 'bg-[#FF385C] text-white shadow-sm'
-                : 'bg-[#F5F5F5] text-[#BBBBBB] hover:bg-[#EEEEEE]'
+                ? 'bg-[#FF385C] text-white shadow-sm hover:bg-[#E8304F]'
+                : 'bg-[#F5F5F5] text-[#BBBBBB] hover:bg-[#E8E8E8] hover:text-[#999999]'
             }`}
           >
             {n}

@@ -119,10 +119,10 @@ export default function HomePage() {
               <button
                 key={c.label}
                 onClick={() => setCondition(c.label)}
-                className={`flex items-center gap-2.5 px-4 py-3 rounded-2xl border text-left transition-all duration-150 ${
+                className={`flex items-center gap-2.5 px-4 py-3 rounded-2xl border text-left transition-all duration-150 cursor-pointer ${
                   condition === c.label
                     ? 'border-[#FF385C] bg-[#FFF0F3] shadow-sm'
-                    : 'border-[#F0F0F0] bg-white hover:border-[#DDDDDD]'
+                    : 'border-[#F0F0F0] bg-white hover:border-[#CCCCCC] hover:shadow-sm hover:bg-[#FAFAFA]'
                 }`}
               >
                 <span className="text-lg">{c.emoji}</span>
@@ -140,10 +140,10 @@ export default function HomePage() {
               <button
                 key={d}
                 onClick={() => setDuration(d)}
-                className={`flex-1 py-3 rounded-2xl text-[13px] font-semibold transition-all duration-150 ${
+                className={`flex-1 py-3 rounded-2xl text-[13px] font-semibold transition-all duration-150 cursor-pointer ${
                   duration === d
                     ? 'bg-[#FF385C] text-white shadow-sm'
-                    : 'bg-white text-[#222222] border border-[#F0F0F0] hover:border-[#DDDDDD]'
+                    : 'bg-white text-[#222222] border border-[#F0F0F0] hover:border-[#CCCCCC] hover:shadow-sm hover:bg-[#FAFAFA]'
                 }`}
               >
                 {d}分
@@ -160,10 +160,10 @@ export default function HomePage() {
               <button
                 key={s.value}
                 onClick={() => setSoundType(s.value)}
-                className={`flex-1 py-2.5 rounded-2xl text-[12px] font-semibold transition-all duration-150 ${
+                className={`flex-1 py-2.5 rounded-2xl text-[12px] font-semibold transition-all duration-150 cursor-pointer ${
                   soundType === s.value
                     ? 'bg-[#FF385C] text-white shadow-sm'
-                    : 'bg-white text-[#717171] border border-[#F0F0F0] hover:border-[#DDDDDD]'
+                    : 'bg-white text-[#717171] border border-[#F0F0F0] hover:border-[#CCCCCC] hover:shadow-sm hover:bg-[#FAFAFA]'
                 }`}
               >
                 {s.label}

@@ -54,7 +54,7 @@ export default function BottomNav() {
             <Link
               key={item.href}
               href={item.href === '/session' ? '/' : item.href}
-              className="flex flex-col items-center gap-0.5 py-2 px-5 min-w-[64px]"
+              className="flex flex-col items-center gap-0.5 py-2 px-5 min-w-[64px] rounded-xl transition-colors duration-150 hover:bg-[#F5F5F5]"
             >
               <item.icon active={active} />
               <span className={`text-[10px] tracking-wide ${active ? 'text-[#FF385C] font-semibold' : 'text-[#AAAAAA]'}`}>

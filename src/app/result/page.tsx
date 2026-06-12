@@ -157,13 +157,13 @@ export default function ResultPage() {
         </PrimaryButton>
         <button
           onClick={() => router.push('/history')}
-          className="w-full py-3.5 rounded-2xl bg-white text-[#222222] text-[13px] font-medium border border-[#EEEEEE] hover:border-[#DDDDDD] transition-all"
+          className="w-full py-3.5 rounded-2xl bg-white text-[#222222] text-[13px] font-medium border border-[#EEEEEE] cursor-pointer hover:border-[#CCCCCC] hover:shadow-sm hover:bg-[#FAFAFA] transition-all duration-150"
         >
           履歴を見る
         </button>
         <button
           onClick={handleShare}
-          className="w-full py-3.5 rounded-2xl bg-white text-[#FF385C] text-[13px] font-medium border border-[#FF385C]/30 hover:bg-[#FFF8F9] transition-all"
+          className="w-full py-3.5 rounded-2xl bg-white text-[#FF385C] text-[13px] font-medium border border-[#FF385C]/30 cursor-pointer hover:bg-[#FFF0F3] hover:shadow-sm transition-all duration-150"
         >
           結果をシェアする
         </button>

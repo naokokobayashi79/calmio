@@ -193,14 +193,14 @@ export default function SessionPage() {
 
         <button
           onClick={handleBeginSession}
-          className="px-14 py-4 rounded-full bg-[#FF385C] text-white text-[15px] font-semibold shadow-lg hover:bg-[#E8304F] active:scale-[0.97] transition-all"
+          className="px-14 py-4 rounded-full bg-[#FF385C] text-white text-[15px] font-semibold shadow-lg cursor-pointer hover:bg-[#E8304F] hover:shadow-xl active:scale-[0.97] transition-all duration-150"
         >
           タップしてはじめる
         </button>
 
         <button
           onClick={() => router.push('/')}
-          className="text-[13px] text-[#AAAAAA] hover:text-[#717171] transition-colors"
+          className="text-[13px] text-[#AAAAAA] cursor-pointer hover:text-[#717171] hover:underline transition-all duration-150"
         >
           キャンセル
         </button>
@@ -242,10 +242,10 @@ export default function SessionPage() {
           {/* Sound */}
           <button
             onClick={toggleSound}
-            className="flex flex-col items-center gap-1.5"
+            className="flex flex-col items-center gap-1.5 cursor-pointer"
           >
-            <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${
-              soundEnabled ? 'bg-[#FFF0F3]' : 'bg-[#F5F5F5]'
+            <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-150 ${
+              soundEnabled ? 'bg-[#FFF0F3] hover:bg-[#FFE4E9]' : 'bg-[#F5F5F5] hover:bg-[#EBEBEB]'
             }`}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={soundEnabled ? '#FF385C' : '#AAAAAA'} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 {soundEnabled ? (
@@ -270,9 +270,9 @@ export default function SessionPage() {
           {/* Pause / Play */}
           <button
             onClick={paused ? handleResume : handlePause}
-            className="flex flex-col items-center gap-1.5"
+            className="flex flex-col items-center gap-1.5 cursor-pointer"
           >
-            <div className="w-16 h-16 rounded-full bg-[#FF385C] flex items-center justify-center shadow-lg active:scale-95 transition-transform">
+            <div className="w-16 h-16 rounded-full bg-[#FF385C] flex items-center justify-center shadow-lg hover:bg-[#E8304F] hover:shadow-xl active:scale-95 transition-all duration-150">
               {paused ? (
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
                   <polygon points="6,4 20,12 6,20" />
@@ -292,9 +292,9 @@ export default function SessionPage() {
           {/* Stop */}
           <button
             onClick={handleStop}
-            className="flex flex-col items-center gap-1.5"
+            className="flex flex-col items-center gap-1.5 cursor-pointer"
           >
-            <div className="w-12 h-12 rounded-full bg-[#F5F5F5] flex items-center justify-center">
+            <div className="w-12 h-12 rounded-full bg-[#F5F5F5] flex items-center justify-center hover:bg-[#EBEBEB] transition-all duration-150">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="#999999">
                 <rect x="4" y="4" width="16" height="16" rx="2" />
               </svg>
@@ -308,10 +308,10 @@ export default function SessionPage() {
           <div className="flex justify-center">
             <button
               onClick={() => setVibrationEnabled((prev) => !prev)}
-              className={`text-[11px] px-4 py-1.5 rounded-full transition-all ${
+              className={`text-[11px] px-4 py-1.5 rounded-full transition-all duration-150 cursor-pointer ${
                 vibrationEnabled
-                  ? 'bg-[#FFF0F3] text-[#FF385C]'
-                  : 'bg-[#F5F5F5] text-[#AAAAAA]'
+                  ? 'bg-[#FFF0F3] text-[#FF385C] hover:bg-[#FFE4E9]'
+                  : 'bg-[#F5F5F5] text-[#AAAAAA] hover:bg-[#EBEBEB]'
               }`}
             >
               振動 {vibrationEnabled ? 'ON' : 'OFF'}

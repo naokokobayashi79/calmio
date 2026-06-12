@@ -1,65 +1,200 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import ScoreInput from '@/components/ScoreInput';
+import FeatureChip from '@/components/FeatureChip';
+import SectionCard from '@/components/SectionCard';
+import PrimaryButton from '@/components/PrimaryButton';
+import type { ConditionType, DurationMinutes, SoundType, BodyScores } from '@/types';
+
+const CONDITIONS: { label: ConditionType; emoji: string }[] = [
+  { label: '体が重い', emoji: '🪨' },
+  { label: 'だるい', emoji: '😮‍💨' },
+  { label: '筋肉痛', emoji: '💪' },
+  { label: '肩や首がつらい', emoji: '🤕' },
+  { label: '緊張している', emoji: '😰' },
+  { label: '眠い', emoji: '😴' },
+  { label: '集中したい', emoji: '🎯' },
+  { label: '気分を整えたい', emoji: '🌿' },
+];
+
+const DURATIONS: DurationMinutes[] = [3, 5, 10];
+
+const SOUND_OPTIONS: { value: SoundType; label: string }[] = [
+  { value: 'none', label: 'OFF' },
+  { value: '432Hz', label: '432Hz' },
+  { value: '528Hz', label: '528Hz' },
+  { value: 'ambient', label: '環境音' },
+];
+
+const defaultScores: BodyScores = {
+  bodyLightness: 5,
+  painRelief: 5,
+  fatigueRelief: 5,
+  mood: 5,
+};
+
+export default function HomePage() {
+  const router = useRouter();
+  const [condition, setCondition] = useState<ConditionType | null>(null);
+  const [duration, setDuration] = useState<DurationMinutes>(3);
+  const [soundType, setSoundType] = useState<SoundType>('none');
+  const [scores, setScores] = useState<BodyScores>({ ...defaultScores });
+
+  const updateScore = (key: keyof BodyScores, value: number) => {
+    setScores((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const canStart = condition !== null;
+
+  const handleStart = () => {
+    if (!canStart) return;
+    const setup = {
+      condition,
+      durationMinutes: duration,
+      before: scores,
+      soundType,
+      vibrationEnabled: false,
+    };
+    sessionStorage.setItem('calmio_setup', JSON.stringify(setup));
+    router.push('/session');
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
+    <div className="max-w-lg mx-auto px-5 pb-8">
+      {/* Hero */}
+      <section className="text-center pt-10 pb-8 space-y-4">
         <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
+          src="/logo.png"
+          alt="Calmio"
+          width={160}
+          height={73}
+          className="mx-auto"
           priority
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+        <p className="text-[#FF385C] font-medium text-[15px]">
+          音と呼吸で、いまの体感を整える。
+        </p>
+        <p className="text-[13px] text-[#717171] leading-relaxed max-w-xs mx-auto">
+          セルフケアのための調整セッション &amp; 体感ログ
+        </p>
+      </section>
+
+      {/* Feature chips */}
+      <section className="flex justify-center gap-2.5 pb-10 flex-wrap">
+        <FeatureChip
+          icon={
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
+            </svg>
+          }
+          label="3分から"
+        />
+        <FeatureChip
+          icon={
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" /><circle cx="12" cy="12" r="3" />
+            </svg>
+          }
+          label="呼吸ガイド"
+        />
+        <FeatureChip
+          icon={
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 3v18h18" /><path d="M7 16l4-8 4 4 4-6" />
+            </svg>
+          }
+          label="体感を記録"
+        />
+      </section>
+
+      <div className="space-y-8">
+        {/* Condition */}
+        <section className="space-y-3">
+          <h2 className="text-[14px] font-semibold text-[#222222] px-1">今の状態は？</h2>
+          <div className="grid grid-cols-2 gap-2.5">
+            {CONDITIONS.map((c) => (
+              <button
+                key={c.label}
+                onClick={() => setCondition(c.label)}
+                className={`flex items-center gap-2.5 px-4 py-3 rounded-2xl border text-left transition-all duration-150 ${
+                  condition === c.label
+                    ? 'border-[#FF385C] bg-[#FFF0F3] shadow-sm'
+                    : 'border-[#F0F0F0] bg-white hover:border-[#DDDDDD]'
+                }`}
+              >
+                <span className="text-lg">{c.emoji}</span>
+                <span className="text-[13px] font-medium text-[#222222]">{c.label}</span>
+              </button>
+            ))}
+          </div>
+        </section>
+
+        {/* Duration */}
+        <section className="space-y-3">
+          <h2 className="text-[14px] font-semibold text-[#222222] px-1">セッション時間</h2>
+          <div className="flex gap-2.5">
+            {DURATIONS.map((d) => (
+              <button
+                key={d}
+                onClick={() => setDuration(d)}
+                className={`flex-1 py-3 rounded-2xl text-[13px] font-semibold transition-all duration-150 ${
+                  duration === d
+                    ? 'bg-[#FF385C] text-white shadow-sm'
+                    : 'bg-white text-[#222222] border border-[#F0F0F0] hover:border-[#DDDDDD]'
+                }`}
+              >
+                {d}分
+              </button>
+            ))}
+          </div>
+        </section>
+
+        {/* Sound */}
+        <section className="space-y-3">
+          <h2 className="text-[14px] font-semibold text-[#222222] px-1">サウンド</h2>
+          <div className="flex gap-2">
+            {SOUND_OPTIONS.map((s) => (
+              <button
+                key={s.value}
+                onClick={() => setSoundType(s.value)}
+                className={`flex-1 py-2.5 rounded-2xl text-[12px] font-semibold transition-all duration-150 ${
+                  soundType === s.value
+                    ? 'bg-[#FF385C] text-white shadow-sm'
+                    : 'bg-white text-[#717171] border border-[#F0F0F0] hover:border-[#DDDDDD]'
+                }`}
+              >
+                {s.label}
+              </button>
+            ))}
+          </div>
+        </section>
+
+        {/* Before Scores */}
+        <section className="space-y-3">
+          <h2 className="text-[14px] font-semibold text-[#222222] px-1">今の体感スコア</h2>
+          <SectionCard className="space-y-5">
+            <ScoreInput label="体の軽さ" value={scores.bodyLightness} onChange={(v) => updateScore('bodyLightness', v)} />
+            <ScoreInput label="痛みの少なさ" value={scores.painRelief} onChange={(v) => updateScore('painRelief', v)} />
+            <ScoreInput label="疲労の少なさ" value={scores.fatigueRelief} onChange={(v) => updateScore('fatigueRelief', v)} />
+            <ScoreInput label="気分の良さ" value={scores.mood} onChange={(v) => updateScore('mood', v)} />
+          </SectionCard>
+        </section>
+
+        {/* CTA */}
+        <section className="pt-2">
+          <PrimaryButton onClick={handleStart} disabled={!canStart}>
+            調整をはじめる
+          </PrimaryButton>
+          {!canStart && (
+            <p className="text-center text-[11px] text-[#BBBBBB] mt-2">
+              まず今の状態を選んでください
+            </p>
+          )}
+        </section>
+      </div>
     </div>
   );
 }

@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Calmio
 
-## Getting Started
+音と呼吸で、いまの体感を整える。
 
-First, run the development server:
+Calmioは、音・呼吸・やさしいリズムで、今のコンディションを記録しながら整えるセルフケアアプリです。
+
+## 機能
+
+- 呼吸ガイド付き調整セッション（3分 / 5分 / 10分）
+- サウンド再生（432Hz / 528Hz / 環境音）
+- スマホ振動対応（Vibration API）
+- セッション前後の体感スコア記録
+- 履歴表示と平均変化の確認
+- 結果のシェア（Web Share API / クリップボード）
+- レスポンシブ対応（スマホ優先UI）
+- PWA対応構成
+
+## 技術スタック
+
+- Next.js (App Router)
+- TypeScript
+- Tailwind CSS
+- Web Audio API
+- Vibration API
+- localStorage
+
+## セットアップ
+
+```bash
+npm install
+```
+
+## ローカル起動
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+http://localhost:3000 でアクセスできます。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ビルド
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## Vercelへのデプロイ
 
-To learn more about Next.js, take a look at the following resources:
+1. [Vercel](https://vercel.com) にGitHubリポジトリを接続
+2. フレームワークプリセットで「Next.js」を選択
+3. デプロイボタンを押す
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+追加設定は不要です。
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 今後の拡張
 
-## Deploy on Vercel
+- Supabase連携によるデータ永続化
+- ユーザー認証（メール / OAuth）
+- セッション種類の追加
+- グラフ表示による体感変化の可視化
+- PWAのService Worker実装
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 注意事項
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+本アプリはセルフケア、リラクゼーション、体感記録を目的としたものです。医療行為、診断、治療、予防を目的とするものではありません。
